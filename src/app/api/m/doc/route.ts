@@ -1,0 +1,20 @@
+import { isAppError } from "@/lib/errors";
+import { driverDocumentUrl, type DocKind } from "@/server/services/signatures";
+import { currentDriver } from "@/server/web";
+
+export const runtime = "nodejs";
+const KINDS = ["term", "signed", "certificate"];
+
+/** Documento do próprio motorista: confere o acesso e redireciona para um link temporário (5 min). */
+export async function GET(req: Request) {
+  const driver = await currentDriver();
+  if (!driver) return new Response("Sessão expirada. Entre novamente.", { status: 401 });
+  const q = new URL(req.url).searchParams;
+  const k = q.get("k") ?? "";
+  if (!KINDS.includes(k)) return new Response("Documento inválido", { status: 400 });
+  try {
+    return Response.redirect(new URL(await driverDocumentUrl(driver, k as DocKind, q.get("c") ?? ""), req.url), 302);
+  } catch (e) {
+    return new Response(isAppError(e) ? e.message : "Falha ao abrir o documento", { status: isAppError(e) ? e.status : 500 });
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "name": "blink-academy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "BLINK ACADEMY — Controle de treinamentos POD e PNR",
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start -p 3000",
+    "typecheck": "tsc --noEmit",
+    "db:migrate": "tsx scripts/migrate.ts",
+    "admin:create": "tsx --conditions=react-server scripts/create-admin.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "secrets": "tsx scripts/secrets.ts"
+  },
+  "engines": {
+    "node": ">=20.18"
+  },
+  "dependencies": {
+    "@node-rs/argon2": "^2.2.2",
+    "@supabase/supabase-js": "^2.118.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "exceljs": "^4.4.0",
+    "lucide-react": "^0.544.0",
+    "next": "^15.5.28",
+    "otpauth": "^9.5.2",
+    "papaparse": "^5.5.3",
+    "pdf-lib": "^1.17.1",
+    "postgres": "^3.4.9",
+    "qrcode": "^1.5.4",
+    "react": "^19.1.10",
+    "react-dom": "^19.1.10",
+    "server-only": "^0.0.1",
+    "tailwind-merge": "^3.3.1",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "@tailwindcss/postcss": "^4.1.14",
+    "@types/node": "^22.20.5",
+    "@types/papaparse": "^5.5.2",
+    "@types/qrcode": "^1.5.6",
+    "@types/react": "19.1",
+    "@types/react-dom": "19.1",
+    "dotenv": "^17.4.2",
+    "postcss": "^8.5.32",
+    "tailwindcss": "^4.1.14",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.4"
+  },
+  "overrides": {
+    "uuid": "^11.1.1",
+    "postcss": "$postcss"
+  }
+}
